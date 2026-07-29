@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "defaultMode": "auto"
+  },
+  "model": "opusplan",
+  "statusLine": {
+    "type": "command",
+    "command": "bash /Users/sai/.claude/statusline-command.sh"
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "ponytail@ponytail": true
+  },
+  "extraKnownMarketplaces": {
+    "ponytail": {
+      "source": {
+        "source": "github",
+        "repo": "DietrichGebert/ponytail"
+      }
+    }
+  },
+  "tui": "default",
+  "theme": "dark"
+}
