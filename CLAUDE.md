@@ -8,7 +8,7 @@ Development environment is **macOS with zsh**.
 
 - Use the **Bash tool** for shell work — there is no PowerShell on this machine.
 - macOS ships **BSD userland, not GNU**. `sed`, `date`, `grep`, `stat`, `find`, and `xargs` behave differently from Linux (e.g. BSD `sed -i` requires a backup-suffix argument: `sed -i ''`; BSD `date` flags differ from GNU `date`). Prefer the dedicated **Read / Edit / Grep / Glob** tools over shelling out to `sed`/`awk`/`find` — they sidestep this entirely.
-- Don't assume GNU coreutils or Homebrew tools are installed. `jq` is available (the statusline depends on it); don't assume `gsed`, `gawk`, or GNU `coreutils` are present.
+- Homebrew is installed. `jq` is available (the statusline depends on it). Don't assume a specific brew package (`gsed`, `gawk`, GNU `coreutils`, etc.) is installed — check with `which`/`brew list` before relying on one.
 - `~` expands fine in zsh, but prefer absolute paths in scripts, hooks, and `settings.json` commands. Avoid `cd` inside a compound Bash command — it can trigger permission prompts; use absolute paths instead.
 - When a command "should work" but doesn't, the first hypothesis is a **BSD-vs-GNU or PATH quirk** — not a logic bug. Investigate the environment before retrying with a variant.
 - Statusline, hook scripts, and anything in `settings.json` that shells out are written in **bash** (see `~/.claude/statusline-command.sh`).
