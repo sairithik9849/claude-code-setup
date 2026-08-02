@@ -4,18 +4,6 @@ The durable, hand-authored layer of my [Claude Code](https://claude.com/claude-c
 
 Session transcripts, memory, caches, and installed plugin/marketplace clones are **not** here on purpose — see [What's not tracked](#whats-not-tracked).
 
-## Current inventory
-
-| Repo path | Symlinked to | What it is |
-|---|---|---|
-| `CLAUDE.md` | `~/.claude/CLAUDE.md` | Global instructions applied across all projects (platform notes, workflow rules, coding standards) |
-| `settings.json` | `~/.claude/settings.json` | Model, statusline, theme, and enabled plugins/marketplaces |
-| `statusline-command.sh` | `~/.claude/statusline-command.sh` | Custom statusline: folder, git branch, model, context %, 5h/7d rate limit usage |
-| `skills/grill-me/` | `~/.claude/skills/grill-me` | Interviews you about a plan/design until every branch is resolved, before any implementation starts |
-| `skills/fan-out-fan-in/` | `~/.claude/skills/fan-out-fan-in` | Fans an open-ended question out to 5 independent researchers (4 Sonnet + 1 cross-model), merges into one answer |
-| `skills/model-chat/` | `~/.claude/skills/model-chat` | Spawns 3+ Claude Code instances into a multi-round debate room that challenges and converges on an answer |
-| `skills/stochastic-multi-agent-consensus/` | `~/.claude/skills/stochastic-multi-agent-consensus` | Spawns N agents with distinct mental-model lenses to scan a decision space in one pass and cluster to consensus |
-
 ## How the symlinks work
 
 Real content lives in this repo. `~/.claude` holds symlinks pointing here, and Claude Code follows them transparently — including files that hardcode their own `~/.claude` path, like `model-chat/model_chat.py`, which `SKILL.md` invokes as `python3 /Users/sai/.claude/skills/model-chat/model_chat.py`. That path still resolves because the symlink makes it the same file.
