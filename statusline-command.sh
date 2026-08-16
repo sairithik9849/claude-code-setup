@@ -19,6 +19,7 @@ model=$(echo "$input" | jq -r '
 ')
 
 used=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
+input_tokens=$(echo "$input" | jq -r '.context_window.total_input_tokens // empty')
 
 five_pct=$(echo "$input" | jq -r '.rate_limits.five_hour.used_percentage // empty')
 week_pct=$(echo "$input" | jq -r '.rate_limits.seven_day.used_percentage // empty')
@@ -49,6 +50,16 @@ time_until() {
 five_remaining=$(time_until "$five_resets_at")
 week_remaining=$(time_until "$week_resets_at")
 
+# Formats a token count as "61k" (rounded to nearest 1000), or raw digits under 1000.
+format_tokens() {
+  local n="$1"
+  if [ "$n" -lt 1000 ]; then
+    printf '%d' "$n"
+  else
+    printf '%dk' "$(((n + 500) / 1000))"
+  fi
+}
+
 RESET='\033[0m'
 BOLD='\033[1m'
 DIM='\033[2m'
@@ -77,6 +88,9 @@ if [ -n "$used" ]; then
     bar_color="$GREEN"
   fi
   printf "  ${DIM}ctx${RESET} ${bar_color}%s%%${RESET}" "$used_int"
+  if [ -n "$input_tokens" ]; then
+    printf " ${bar_color}(%s)${RESET}" "$(format_tokens "$input_tokens")"
+  fi
 fi
 
 # 5-hour plan — only show when the field is present in the payload
