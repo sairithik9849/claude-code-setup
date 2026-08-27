@@ -18,6 +18,8 @@ model=$(echo "$input" | jq -r '
   end
 ')
 
+effort=$(echo "$input" | jq -r '.effort.level // empty')
+
 used=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
 input_tokens=$(echo "$input" | jq -r '.context_window.total_input_tokens // empty')
 
@@ -76,6 +78,11 @@ if [ -n "$branch" ]; then
 fi
 
 printf "  ${MAGENTA}%s${RESET}" "$model"
+
+# Reasoning effort — only present when the current model supports it
+if [ -n "$effort" ]; then
+  printf " ${DIM}%s${RESET}" "$effort"
+fi
 
 # Context bar — only show when data is actually present
 if [ -n "$used" ]; then

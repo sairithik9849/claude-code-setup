@@ -21,13 +21,11 @@ Development environment is **macOS with zsh**.
 - **No silent regressions.** Never revert styling, classes, or behavior to an earlier version as a side effect. If existing styles or behavior must change, say so explicitly.
 - **Investigate environment before a second fix attempt.** If a shell/path/deps fix fails, stop iterating. List every assumption the first fix relied on (shell, available binaries, path conventions, escaping) and verify each before trying again.
 - **Verify end-to-end before claiming done.** Type checks and linting verify code correctness, not feature correctness. If you cannot run or render the feature, say so explicitly rather than claiming it works.
-- **Usage-aware visual MCP tools.** Screenshot/browser MCP tools (`claude-in-chrome`, Playwright, or any other snapshot/screenshot MCP) are token-heavy — page snapshots and screenshots can run thousands of tokens each. When the statusline's 5-hour usage is **above 50%**, state the current usage and ask before invoking any such tool. If the user has already authorized this class of tool this turn or session, don't re-ask.
 
 ## Coding Standards
 
-- **Modularity & Single Responsibility:** Write highly modular, decoupled code. Functions and classes have a single responsibility. Extract complex logic into smaller, testable helper functions.
-- **Defensive Programming:** Fail fast. Validate inputs at the boundaries, use early returns to avoid deep nesting, and never swallow errors silently. Catch specific exceptions and handle them explicitly.
-- **Self-Documenting Code:** Rely on descriptive, unabbreviated naming over inline comments. Variables describe their data; functions describe their action.
 - **Semantic Commentary:** Write comments to explain the *why* behind architectural decisions or non-obvious logic, never the *what*. If the *what* requires explanation, refactor for clarity instead.
-- **State & Purity:** Favor pure functions and immutable data structures. Avoid global mutable state. When state management is necessary, keep it localized to the tightest possible scope.
-- **No Magic Values:** Hardcoded numbers, string keys, and configuration URLs get extracted into named constants or environment variables.
+
+## Technical decision-making
+
+When making technical decisions, don't give too much weight to development cost. You can write and modify code far faster than a human developer, but your cost estimates are anchored to human data (days/weeks/months) and therefore overstate the effort of the more robust option. Do not let that bias push you toward cheap solutions that are low-quality, not scalable, or hard to maintain. Choose the option that's best for the long-term health of the codebase and assume the implementation cost is low.

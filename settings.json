@@ -3,6 +3,31 @@
     "defaultMode": "auto"
   },
   "model": "opusplan",
+  "skillOverrides": {
+    "design-taste-frontend-v1": "off"
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/sai/.claude/hooks/prompt-start.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/sai/.claude/hooks/notify-if-long.sh"
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "bash /Users/sai/.claude/statusline-command.sh"
@@ -10,7 +35,11 @@
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
     "claude-code-setup@claude-plugins-official": true,
-    "ponytail@ponytail": true
+    "ponytail@ponytail": true,
+    "impeccable@impeccable": true,
+    "playwright@claude-plugins-official": true,
+    "github@claude-plugins-official": true,
+    "context7@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "ponytail": {
@@ -18,8 +47,17 @@
         "source": "github",
         "repo": "DietrichGebert/ponytail"
       }
+    },
+    "impeccable": {
+      "source": {
+        "source": "github",
+        "repo": "pbakaus/impeccable"
+      }
     }
   },
+  "effortLevel": "xhigh",
   "tui": "default",
-  "theme": "dark"
+  "theme": "dark",
+  "inputNeededNotifEnabled": true,
+  "agentPushNotifEnabled": true
 }
