@@ -1,8 +1,13 @@
 {
+  "env": {
+    "CLAUDE_CODE_PLUGIN_DIRS": "/Users/sai/.claude/mods/status-card:/Users/sai/.claude/mods/switchboard",
+    "CLAUDE_CODE_PLUGIN_DIR_WATCH": "1",
+    "CLAUDE_CODE_SCROLL_SPEED": "2"
+  },
   "permissions": {
     "defaultMode": "auto"
   },
-  "model": "opusplan",
+  "model": "opus",
   "skillOverrides": {
     "design-taste-frontend-v1": "off"
   },
@@ -39,7 +44,9 @@
     "impeccable@impeccable": true,
     "playwright@claude-plugins-official": true,
     "github@claude-plugins-official": true,
-    "context7@claude-plugins-official": true
+    "context7@claude-plugins-official": true,
+    "humanizer@humanizer": true,
+    "vercel@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "ponytail": {
@@ -53,11 +60,27 @@
         "source": "github",
         "repo": "pbakaus/impeccable"
       }
+    },
+    "humanizer": {
+      "source": {
+        "source": "github",
+        "repo": "blader/humanizer"
+      }
     }
   },
   "effortLevel": "xhigh",
-  "tui": "default",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "xhigh"
+    },
+    "claude-sonnet-5-5": {
+      "effortLevel": "xhigh"
+    }
+  },
+  "tui": "fullscreen",
+  "autoMemoryEnabled": false,
   "theme": "dark",
+  "wheelScrollAccelerationEnabled": false,
   "inputNeededNotifEnabled": true,
   "agentPushNotifEnabled": true
 }

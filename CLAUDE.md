@@ -15,11 +15,14 @@ Development environment is **macOS with zsh**.
 
 ## Workflow Rules
 
-- **Plan-first for multi-file or UI changes.** Before editing more than one file, or anything visible in the browser, present a plan via ExitPlanMode that lists: files to modify, what changes in each, and any existing behavior that must be preserved. Wait for approval before editing.
+- **Plan Mode is mandatory before any implementation plan — no exceptions.** The moment you are about to propose an implementation plan for anything touching more than one file, or anything visible in the browser/UI, STOP and enter Plan Mode itself first.
+  - This holds even if the whole conversation up to that point — discussion, requirements-gathering, being grilled on the design — happened in auto mode. Being in auto mode when the need for a plan becomes clear is not an exception; it's the trigger to switch.
+  - The plan (files to modify, what changes in each, existing behavior to preserve) must be presented via ExitPlanMode and approved before any edits begin.
 - **Analysis requests are not edit requests.** A question, a pasted spec, or "what would happen if…" is not authorization to touch files. Acknowledge and analyze first; start editing only after an explicit go-ahead (e.g. "do it", "yes", "go ahead").
 - **Inventory existing interactions before integrating new components.** Before adding any component into an area that already has hover effects, animations, or pointer behavior, list every existing interaction and state explicitly how each will be preserved or intentionally changed.
 - **No silent regressions.** Never revert styling, classes, or behavior to an earlier version as a side effect. If existing styles or behavior must change, say so explicitly.
 - **Investigate environment before a second fix attempt.** If a shell/path/deps fix fails, stop iterating. List every assumption the first fix relied on (shell, available binaries, path conventions, escaping) and verify each before trying again.
+- **Check docs, not memory, for versioned libraries.** When a third-party library/framework API may have changed since training, query Context7 for the installed version before writing code or making a second fix attempt. Skip for stdlib and stable APIs.
 - **Verify end-to-end before claiming done.** Type checks and linting verify code correctness, not feature correctness. If you cannot run or render the feature, say so explicitly rather than claiming it works.
 
 ## Coding Standards
