@@ -1,0 +1,19 @@
+{
+  "name": "claude-attach",
+  "publisher": "local",
+  "displayName": "Claude Attach Terminal",
+  "description": "Lets /handoff open an integrated terminal attached to a Claude Code background session.",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "main": "./extension.js",
+  "activationEvents": [
+    "onStartupFinished",
+    "onUri"
+  ],
+  "scripts": {
+    "install-local": "npx --yes @vscode/vsce package --allow-missing-repository --skip-license -o \"${TMPDIR:-/tmp}/claude-attach.vsix\" && code --install-extension \"${TMPDIR:-/tmp}/claude-attach.vsix\" --force"
+  }
+}

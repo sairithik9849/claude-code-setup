@@ -15,9 +15,8 @@ Development environment is **macOS with zsh**.
 
 ## Workflow Rules
 
-- **Plan Mode is mandatory before any implementation plan — no exceptions.** The moment you are about to propose an implementation plan for anything touching more than one file, or anything visible in the browser/UI, STOP and enter Plan Mode itself first.
-  - This holds even if the whole conversation up to that point — discussion, requirements-gathering, being grilled on the design — happened in auto mode. Being in auto mode when the need for a plan becomes clear is not an exception; it's the trigger to switch.
-  - The plan (files to modify, what changes in each, existing behavior to preserve) must be presented via ExitPlanMode and approved before any edits begin.
+- **Plan before multi-file or UI changes.** Before editing more than one file, or anything visible in the UI, enter Plan Mode and present a plan via ExitPlanMode: files to modify, the change in each, existing behavior to preserve. Auto mode doesn't exempt this. Why: the plan is where misheard instructions and design calls get caught before code exists, and its file is what `/handoff` points at.
+  - One approval per plan: a `/handoff` session or subagent carrying out an approved plan implements it directly, and returns to Plan Mode only when the work needs files or behavior the plan didn't name.
 - **Analysis requests are not edit requests.** A question, a pasted spec, or "what would happen if…" is not authorization to touch files. Acknowledge and analyze first; start editing only after an explicit go-ahead (e.g. "do it", "yes", "go ahead").
 - **Inventory existing interactions before integrating new components.** Before adding any component into an area that already has hover effects, animations, or pointer behavior, list every existing interaction and state explicitly how each will be preserved or intentionally changed.
 - **No silent regressions.** Never revert styling, classes, or behavior to an earlier version as a side effect. If existing styles or behavior must change, say so explicitly.

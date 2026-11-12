@@ -1,0 +1,6 @@
+{
+  "name": "switchboard",
+  "version": "0.1.0",
+  "description": "Click-to-switch model and effort from the footer",
+  "types": "./types/index.d.ts"
+}

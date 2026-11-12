@@ -25,9 +25,10 @@ artifacts — assume it will read them.
 4. This session's name — read it from `ListAgents` ("This session is ..."). Tell
    the next session to message this one for the reasoning behind a decision
    rather than guess at it.
-5. Sign-off — "Read the plan, play it back to me so I can check your
-   understanding, then wait." The playback is the user's checkpoint before the
-   session touches files.
+5. Sign-off — "The plan is approved. Read it, then ask me one question: work
+   in a new worktree, the main checkout, or an existing worktree? Implement as
+   soon as I answer." A handoff means the user already approved the plan; the
+   next session is the implementer.
 
 ## Mode 1 — launch a new session (default)
 
@@ -39,10 +40,22 @@ session name or "recent"). Launch a background session in the current repo:
     EOF
     )"
 
-The quoted heredoc keeps newlines and backticks intact. Report the session id it
-prints; tell the user to run `claude attach <id>` when ready. Launch straight
-away — the sign-off makes the new session pause for review, so the user checks
-the brief by attaching.
+The quoted heredoc keeps newlines and backticks intact. Launch straight away —
+the new session pauses on its worktree question, and the user answers it by
+attaching. Then open a terminal attached to it, using the id `claude --bg`
+printed:
+
+    ~/.claude/skills/handoff/open-terminal.sh <id> "<short slug>"
+
+Pass the same slug given to `--name`; it becomes the tab's title.
+
+Report the session id and what the script printed:
+
+- `opened` — a VS Code terminal tab named after the session is attached to it; it takes the
+  session's name once the attach starts. The user clicks it when ready.
+- `requested` — VS Code was asked to open one in its last-focused window. If no
+  tab appears, the user runs `claude attach <id>`.
+- `unavailable` — tell the user to run `claude attach <id>` when ready.
 
 ## Mode 2 — brief a running session
 
