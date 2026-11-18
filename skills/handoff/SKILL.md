@@ -33,7 +33,15 @@ artifacts — assume it will read them.
 ## Mode 1 — launch a new session (default)
 
 Bare `/handoff`, or an argument naming what to focus on (anything that isn't a
-session name or "recent"). Launch a background session in the current repo:
+session name or "recent"). This session's environment picks the launcher: Orca
+when `TERM_PROGRAM` is `Orca` or `ORCA_WORKSPACE_ID` is set, otherwise
+`claude --bg`. Orca stays running while the user works in VS Code, so whether
+Orca is running says nothing about where they are.
+
+In Orca, read [orca.md](orca.md) before composing the brief: it replaces the
+sign-off and the launch below.
+
+Otherwise launch a background session in the current repo:
 
     claude --bg --name "<short slug>" "$(cat <<'EOF'
     <brief>

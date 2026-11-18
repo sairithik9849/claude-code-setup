@@ -21,12 +21,18 @@ while p=$(ps -o ppid= -p "$p" 2>/dev/null | tr -d ' ') && [[ -n $p && $p -gt 1 ]
   pids+=",$p"
 done
 
-if [[ -S ${CLAUDE_ATTACH_SOCK:-} ]] &&
-  curl -sf --max-time 3 --unix-socket "$CLAUDE_ATTACH_SOCK" -G http://localhost/attach \
+# Trying every window's socket is safe: a window answers 409 unless the pid chain runs through one of
+# its own terminals, so only this one opens a tab. A terminal restored before the extension activated
+# never gets $CLAUDE_ATTACH_SOCK, so the variable alone can miss this window.
+dir=${TMPDIR:-/tmp}
+for sock in "${CLAUDE_ATTACH_SOCK:-}" "${dir%/}"/claude-attach-*.sock; do
+  [[ -S $sock ]] || continue
+  if curl -sf --max-time 3 --unix-socket "$sock" -G http://localhost/attach \
     --data-urlencode "id=$id" --data-urlencode "cwd=$PWD" --data-urlencode "pids=$pids" --data-urlencode "name=$name" >/dev/null; then
-  echo opened
-  exit 0
-fi
+    echo opened
+    exit 0
+  fi
+done
 
 # An empty TERM_PROGRAM means a background session: it can't tell where it's attached, so assume
 # VS Code if it's running. Any other terminal app means the user isn't in VS Code.
